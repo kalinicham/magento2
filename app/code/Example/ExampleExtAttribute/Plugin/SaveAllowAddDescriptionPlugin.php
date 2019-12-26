@@ -9,7 +9,8 @@ namespace Example\ExampleExtAttribute\Plugin;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
-use Example\ExampleExtAttribute\Model\ResourceModel\AddDescription as ResourceModel;
+use Example\ExampleExtAttribute\Api\AllowAddDescriptionRepositoryInterface as Resource;
+
 
 /**
  * Save extension attribute
@@ -17,14 +18,14 @@ use Example\ExampleExtAttribute\Model\ResourceModel\AddDescription as ResourceMo
 class SaveAllowAddDescriptionPlugin
 {
     /**
-     * @var ResourceModel
+     * @var Resource
      */
-    private $resourceModel;
+    private $resource;
 
     public function __construct(
-        ResourceModel $resourceModel
+        Resource $resourceModel
     ) {
-        $this->resourceModel = $resourceModel;
+        $this->resource = $resourceModel;
     }
 
     /**
@@ -33,13 +34,12 @@ class SaveAllowAddDescriptionPlugin
      * @param CustomerRepositoryInterface $subject
      * @param CustomerInterface $resultCustomer
      * @return CustomerInterface
-     * @throws \Magento\Framework\Exception\AlreadyExistsException
      */
     public function afterSave(CustomerRepositoryInterface $subject, CustomerInterface $resultCustomer)
     {
         $extensionAttributes = $resultCustomer->getExtensionAttributes();
         $allowAddDescription = $extensionAttributes->getAllowAddDescription();
-        $this->resourceModel->save($allowAddDescription);
+        $this->resource->save($allowAddDescription);
         return $resultCustomer;
     }
 }

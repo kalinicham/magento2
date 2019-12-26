@@ -35,9 +35,4 @@ class AddDescription extends AbstractModel implements AllowAddDescriptionInterfa
     {
         return $this->setData(self::VALUE, $value);
     }
-
-    public function getByEntityId($id)
-    {
-        return $this->load($id, 'entity_id');
-    }
 }

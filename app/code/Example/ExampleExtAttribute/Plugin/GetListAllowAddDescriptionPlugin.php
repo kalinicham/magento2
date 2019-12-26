@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Example\ExampleExtAttribute\Plugin;
 
-use Example\ExampleExtAttribute\Api\Data\AllowAddDescriptionInterface;
+use Example\ExampleExtAttribute\Api\AllowAddDescriptionRepositoryInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerSearchResultsInterface;
 
@@ -17,12 +17,12 @@ use Magento\Customer\Api\Data\CustomerSearchResultsInterface;
 class GetListAllowAddDescriptionPlugin
 {
     /**
-     * @var AllowAddDescriptionInterface
+     * @var AllowAddDescriptionRepositoryInterface
      */
     private $allowAddDescription;
 
     public function __construct(
-        AllowAddDescriptionInterface $allowAddDescription
+        AllowAddDescriptionRepositoryInterface $allowAddDescription
     ) {
         $this->allowAddDescription = $allowAddDescription;
     }
@@ -39,7 +39,7 @@ class GetListAllowAddDescriptionPlugin
     {
         $customers = [];
         foreach ($searchCriteria->getItems() as $entity) {
-            $allowDescription = $this->allowAddDescription->getByEntityId($entity->getId());
+            $allowDescription = $this->allowAddDescription->get($entity->getId());
 
             $extensionAttributes = $entity->getExtensionAttributes();
             $extensionAttributes->setAllowAddDescription($allowDescription);

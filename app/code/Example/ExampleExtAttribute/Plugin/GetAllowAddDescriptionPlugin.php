@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Example\ExampleExtAttribute\Plugin;
 
-use Example\ExampleExtAttribute\Api\Data\AllowAddDescriptionInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
+use Example\ExampleExtAttribute\Api\AllowAddDescriptionRepositoryInterface;
 
 /**
  * Class add extension attribute to customer
@@ -17,12 +17,12 @@ use Magento\Customer\Api\Data\CustomerInterface;
 class GetAllowAddDescriptionPlugin
 {
     /**
-     * @var AllowAddDescriptionInterface
+     * @var AllowAddDescriptionRepositoryInterface
      */
     private $allowAddDescription;
 
     public function __construct(
-        AllowAddDescriptionInterface $allowAddDescription
+        AllowAddDescriptionRepositoryInterface $allowAddDescription
     ) {
         $this->allowAddDescription = $allowAddDescription;
     }
@@ -37,7 +37,7 @@ class GetAllowAddDescriptionPlugin
      */
     public function afterGet(CustomerRepositoryInterface $subject, CustomerInterface $resultCustomer)
     {
-        $allowDescription = $this->allowAddDescription->getByEntityId($resultCustomer->getId());
+        $allowDescription = $this->allowAddDescription->get($resultCustomer->getId());
         $extensionAttributes = $resultCustomer->getExtensionAttributes();
         $extensionAttributes->setAllowAddDescription($allowDescription);
         $resultCustomer->setExtensionAttributes($extensionAttributes);
