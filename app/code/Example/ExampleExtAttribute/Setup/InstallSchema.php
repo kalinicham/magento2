@@ -40,7 +40,7 @@ class InstallSchema implements InstallSchemaInterface
             ['identity' => false,'unsigned' => false, 'nullable' => false, 'primary' => false],
             'Customer ID'
         )->addColumn(
-            'allow_description',
+            'allow_add_description',
             \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
             null,
             ['identity' => false,'unsigned' => true, 'nullable' => false, 'primary' => false],

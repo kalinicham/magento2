@@ -7,16 +7,23 @@ declare(strict_types=1);
 
 namespace Example\ExampleExtAttribute\Model;
 
-use Example\ExampleExtAttribute\Api\AllowAddDescriptionInterface;
+use Example\ExampleExtAttribute\Api\Data\AllowAddDescriptionInterface;
+use Example\ExampleExtAttribute\Model\ResourceModel\AddDescription as ResourceModel;
+use Magento\Framework\Model\AbstractModel;
 
-class AddDescription implements AllowAddDescriptionInterface
+class AddDescription extends AbstractModel implements AllowAddDescriptionInterface
 {
-    const VALUE = 0;
+    private $resourceModel;
+
+    protected function _construct()
+    {
+        $this->_init(ResourceModel::class);
+    }
 
     /**
      * @inheritDoc
      */
-    public function getValue()
+    public function getAllowDescription()
     {
         return $this->getData(self::VALUE);
     }
@@ -24,8 +31,13 @@ class AddDescription implements AllowAddDescriptionInterface
     /**
      * @inheritDoc
      */
-    public function setValue($value)
+    public function setAllowDescription($value)
     {
         return $this->setData(self::VALUE, $value);
+    }
+
+    public function getByEntityId($id)
+    {
+        return $this->load($id, 'entity_id');
     }
 }
