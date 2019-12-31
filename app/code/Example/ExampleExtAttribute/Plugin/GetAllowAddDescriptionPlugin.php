@@ -7,22 +7,27 @@ declare(strict_types=1);
 
 namespace Example\ExampleExtAttribute\Plugin;
 
+use Example\ExampleApi\Api\GetAllowAddDescriptionInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
-use Example\ExampleExtAttribute\Api\AllowAddDescriptionRepositoryInterface;
 
 /**
  * Class add extension attribute to customer
  */
 class GetAllowAddDescriptionPlugin
 {
+
     /**
-     * @var AllowAddDescriptionRepositoryInterface
+     * @var GetAllowAddDescriptionInterface
      */
     private $allowAddDescription;
 
+    /**
+     * GetAllowAddDescriptionPlugin constructor.
+     * @param GetAllowAddDescriptionInterface $allowAddDescription
+     */
     public function __construct(
-        AllowAddDescriptionRepositoryInterface $allowAddDescription
+        GetAllowAddDescriptionInterface $allowAddDescription
     ) {
         $this->allowAddDescription = $allowAddDescription;
     }
@@ -34,10 +39,11 @@ class GetAllowAddDescriptionPlugin
      * @param CustomerInterface $resultCustomer
      * @return CustomerInterface
      * @SuppressWarnings("PMD.UnusedFormalParameter")
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function afterGet(CustomerRepositoryInterface $subject, CustomerInterface $resultCustomer)
     {
-        $allowDescription = $this->allowAddDescription->get($resultCustomer->getId());
+        $allowDescription = $this->allowAddDescription->execute($resultCustomer->getEmail());
         $extensionAttributes = $resultCustomer->getExtensionAttributes();
         $extensionAttributes->setAllowAddDescription($allowDescription);
         $resultCustomer->setExtensionAttributes($extensionAttributes);

@@ -12,4 +12,19 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
+
+    <route method="GET" url="/V1/get-is-customer-allowed-add-description/:customerEmail">
+        <service class="Example\ExampleApi\Api\GetAllowAddDescriptionInterface" method="execute"/>
+        <resources>
+            <resource ref="Magento_Customer::customer"/>
+        </resources>
+    </route>
+
+    <route method="POST" url="/V1/set-to-customer-allowed-add-description/:customerEmail/:allowadddesription">
+        <service class="Example\ExampleApi\Api\SetAllowAddDescriptionInterface" method="execute"/>
+        <resources>
+            <resource ref="Magento_Customer::customer"/>
+        </resources>
+    </route>
+
 </routes>

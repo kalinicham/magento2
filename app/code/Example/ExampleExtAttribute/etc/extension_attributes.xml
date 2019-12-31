@@ -8,6 +8,6 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
     <extension_attributes for="Magento\Customer\Api\Data\CustomerInterface">
-        <attribute code="allow_add_description" type="Example\ExampleExtAttribute\Api\Data\AllowAddDescriptionInterface" />
+        <attribute code="allow_add_description" type="Example\ExampleApi\Api\Data\AllowAddDescriptionInterface" />
     </extension_attributes>
 </config>

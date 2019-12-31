@@ -13,11 +13,5 @@
 
     <type name="Magento\Customer\Api\CustomerRepositoryInterface">
         <plugin name="get_allow_add_description" type="Example\ExampleExtAttribute\Plugin\GetAllowAddDescriptionPlugin" disabled="false" />
-        <plugin name="get_list_allow_add_description" type="Example\ExampleExtAttribute\Plugin\GetListAllowAddDescriptionPlugin" disabled="false" />
-        <plugin name="save_allow_add_description" type="Example\ExampleExtAttribute\Plugin\SaveAllowAddDescriptionPlugin" disabled="false" />
     </type>
-
-    <preference for="Example\ExampleExtAttribute\Api\AllowAddDescriptionRepositoryInterface" type="Example\ExampleExtAttribute\Model\AddDescriptionRepository" />
-    <preference for="Example\ExampleExtAttribute\Api\Data\AllowAddDescriptionInterface" type="Example\ExampleExtAttribute\Model\AddDescription" />
-
 </config>
