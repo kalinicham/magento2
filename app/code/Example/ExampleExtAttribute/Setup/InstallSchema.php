@@ -34,13 +34,13 @@ class InstallSchema implements InstallSchemaInterface
             ['identity' => true, 'unsigned' => false, 'nullable' => false, 'primary' => true],
             'ID'
         )->addColumn(
-            'entity_id',
-            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            'customer_email',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
             null,
-            ['identity' => false,'unsigned' => false, 'nullable' => false, 'primary' => false],
-            'Customer ID'
+            ['length' => 255, 'nullable' => true],
+            'Customer Email address'
         )->addColumn(
-            'allow_description',
+            'allow_add_description',
             \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
             null,
             ['identity' => false,'unsigned' => true, 'nullable' => false, 'primary' => false],
