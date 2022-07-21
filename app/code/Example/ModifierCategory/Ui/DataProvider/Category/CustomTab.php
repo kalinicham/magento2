@@ -37,6 +37,8 @@ class CustomTab extends AbstractModifier implements ModifierInterface
 
     public function modifyData(array $data): array
     {
+        //треба вішати плагін а то воно при загрузці не перехватує і залишати вот це пустим
+
         return $data;
     }
 
