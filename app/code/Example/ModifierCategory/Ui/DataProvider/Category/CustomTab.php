@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Example\ModifierCategory\Ui\DataProvider\Category;
 
+use Example\SystemXML\Helper\DataConfig;
 use Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\AbstractModifier;
 use Magento\Ui\Component\Container;
 use Magento\Ui\Component\DynamicRows;
@@ -34,6 +35,13 @@ class CustomTab extends AbstractModifier implements ModifierInterface
     protected const GROUP_CUSTOM_OPTIONS_SCOPE = 'custom_tab';
 
     protected array $meta = [];
+    private DataConfig $dataConfig;
+
+    public function __construct(
+        DataConfig $dataConfig
+    ) {
+        $this->dataConfig = $dataConfig;
+    }
 
     public function modifyData(array $data): array
     {
@@ -46,7 +54,9 @@ class CustomTab extends AbstractModifier implements ModifierInterface
     {
         $this->meta = $meta;
 
-        $this->createCustomTabPanel();
+        if ($this->dataConfig->getGeneralConfig(DataConfig::CUSTOM_TAB_ENABLE)) {
+            $this->createCustomTabPanel();
+        }
 
         return $this->meta;
     }
@@ -180,7 +190,6 @@ class CustomTab extends AbstractModifier implements ModifierInterface
             ]
         ];
     }
-
 
     protected function getCommonContainerConfig($sortOrder): array
     {
